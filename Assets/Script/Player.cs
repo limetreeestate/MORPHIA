@@ -103,6 +103,10 @@ public class Player : MonoBehaviour
         }
         switch (hit.gameObject.tag)
         {
+			case "Checkpoint":
+				Debug.Log ("Checkpoint");
+			setLastCheckpoint (hit.gameObject.GetComponents<Checkpoint>()[1]);
+				break;
             case "Coin":
                 levelManager.instance.collectCoin();
                 Destroy(hit.gameObject);

@@ -5,16 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class Checkpoint : MonoBehaviour {
 	public PlayerController controller;
-	//private CharacterController controller;
-
-	// Use this for initialization
-	void Start () {
-		//controller = GetComponent<CharacterController> ();
-	}
 
 	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
+		Debug.Log ("Checkpoint collision");
 		if (hit.gameObject.tag == "Player")
+		{
+			controller.setCheckpoint (this);
+		}
+	}
+
+	private void OnCollisionEnter(Collision c)
+	{
+		Debug.Log ("Checkpoint collision");
+		if (c.gameObject.tag == "Player")
 		{
 			controller.setCheckpoint (this);
 		}
