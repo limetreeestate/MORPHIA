@@ -4,17 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class PlayerController : MonoBehaviour {
-	public Player player;
+public class PlayerController : MonoBehaviour
+{
+    public Player player;
 
     public void forward()
     {
-		player.forward();
+        player.forward();
     }
 
     public void backward()
     {
-		player.backward();
+        player.backward();
     }
 
     public void jump()
@@ -29,7 +30,12 @@ public class PlayerController : MonoBehaviour {
 
     public void reset()
     {
+        player.reset();
+    }
 
+    public void setCheckpoint(Checkpoint c)
+    {
+        player.setLastCheckpoint(c);
     }
 
 
