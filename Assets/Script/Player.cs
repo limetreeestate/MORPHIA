@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private float gravity = 30.0f;
     private float speed = 5.0f;
     private CharacterController controller;
-    private Vector3 moveVector, lastMoveVector;
+    private Vector3 moveVector;
     private float jumpForce = 10;
     // Use this for initialization
     void Start()
@@ -41,7 +41,6 @@ public class Player : MonoBehaviour
 
         moveVector.y = verticalVelocity;
         controller.Move(moveVector * Time.deltaTime);
-        lastMoveVector = moveVector;
     }
 
     public void forward()
@@ -103,28 +102,28 @@ public class Player : MonoBehaviour
         }
         switch (hit.gameObject.tag)
         {
-			case "Checkpoint":
-				Debug.Log ("Checkpoint");
-			setLastCheckpoint (hit.gameObject.GetComponents<Checkpoint>()[1]);
-				break;
             case "Coin":
                 levelManager.instance.collectCoin();
                 Destroy(hit.gameObject);
-
                 break;
+
             case "life":
                 levelManager.instance.collectLife();
                 Destroy(hit.gameObject);
                 break;
+
             case "JumpPad":
                 verticalVelocity = jumpForce * 2;
                 break;
+
             case "Telepoter":
                 transform.position = hit.transform.GetChild(0).position;
                 break;
+
             case "winposition":
                 levelManager.instance.win();
                 break;
+
             default:
                 break;
 
