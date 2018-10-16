@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class levelManager : MonoBehaviour {
 	private int hitpoint = 3;
@@ -13,11 +14,15 @@ public class levelManager : MonoBehaviour {
 	public Checkpoint spawnPosition;
 	public Transform playerTransform;
 	public PlayerController controller;
+    public GameObject pauseMenu;
 
 	public static levelManager instance { set; get; }
 
-
-	private void Awake()
+    private void Start()
+    {
+        pauseMenu.SetActive(false);
+    }
+    private void Awake()
 	{
 		instance = this;
 		lifeText.text = "Lives: " + hitpoint.ToString();
@@ -33,7 +38,7 @@ public class levelManager : MonoBehaviour {
 			hitpoint--;
 			lifeText.text = "Lives: " + hitpoint.ToString();
 			if (hitpoint <= 0) {
-				Application.LoadLevel("menu");
+                toMenu();
 			}
 		}
 
@@ -43,7 +48,7 @@ public class levelManager : MonoBehaviour {
 		{
 			PlayerPrefs.SetInt("PlayerScore", score);
 		}
-		Application.LoadLevel("menu");
+        toMenu();
 	}
 	public void collectCoin() {
 		score += 5;
@@ -57,5 +62,15 @@ public class levelManager : MonoBehaviour {
 			lifeText.text = "Lives: " + hitpoint.ToString();
 		}
 	}
+
+    public void toMenu()
+    {
+        SceneManager.LoadScene("menu");
+    }
+
+    public void togglePauseMenu()
+    {
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+    }
 
 }
