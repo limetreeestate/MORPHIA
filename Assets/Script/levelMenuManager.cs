@@ -34,7 +34,12 @@ public class levelMenuManager : MonoBehaviour {
         SceneManager.LoadScene("Level5");
 
     }
-    
+    public void toLevel6()
+    {
+        SceneManager.LoadScene("Level6");
+
+    }
+
     // Update is called once per frame
     void Update () {
 		
